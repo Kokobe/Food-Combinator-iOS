@@ -8,16 +8,30 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var alertIsVisible: Bool = false
+    
     var body: some View {
         VStack {
-            Text("Bro this is a food app")
+            Text("Knock Knock")
                 .font(.headline)
                 .foregroundColor(Color.green)
                 .padding()
-            Button(action: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Action@*/{}/*@END_MENU_TOKEN@*/) {
-                /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Content@*/Text("Button")/*@END_MENU_TOKEN@*/
+            
+            Button(action: {
+                print("button pressed!")
+                self.alertIsVisible = true
+            }) {
+                Text("Who's there?")
             }
+            .alert(isPresented: $alertIsVisible) { () ->
+                Alert in
+                return Alert(title: Text("hey bitch"), message: Text("Hey bitch who?"),
+                    dismissButton: .default(Text("Hey bitch I fucked your mom")))
+            }
+        
         }
+        
     }
 }
 
