@@ -10,24 +10,51 @@ import SwiftUI
 struct ContentView: View {
     
     @State var alertIsVisible: Bool = false
+    @State var userBullseye: Double = 50
     
     var body: some View {
         VStack {
-            Text("Knock Knock")
-                .font(.headline)
-                .foregroundColor(Color.green)
-                .padding()
+            // Target Row
+            HStack {
+                Text("Put the bullseye as close as you can to: ")
+                
+                Text("100")
+            }
             
+            // Slider Row
+            HStack {
+                Text("1")
+                Slider(value: $userBullseye)
+                    .frame(width: 300.0)
+                Text("100")
+            }
+            
+
             Button(action: {
                 print("button pressed!")
                 self.alertIsVisible = true
             }) {
-                Text("Who's there?")
+                Text("Hit me")
             }
             .alert(isPresented: $alertIsVisible) { () ->
                 Alert in
-                return Alert(title: Text("hey bitch"), message: Text("Hey bitch who?"),
-                    dismissButton: .default(Text("Hey bitch I fucked your mom")))
+                return Alert(title: Text("Nice!"), message: Text("You scored a 100."),
+                    dismissButton: .default(Text("Next Round")))
+            }
+            
+            
+            // Score Info Row
+            HStack {
+                Button(action: {}) {
+                    Text("Start Over")
+                }
+                Text("Score: ")
+                Text("999999")
+                Text("Round: ")
+                Text("99999")
+                Button(action: {}) {
+                    Text("Info")
+                }
             }
         
         }
