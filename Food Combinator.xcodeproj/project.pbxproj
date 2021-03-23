@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D3BE9512608473500E8F51D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8D3BE9502608473500E8F51D /* Alamofire */; };
 		8DE51F6C2605211400E124D2 /* Food_CombinatorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE51F6B2605211400E124D2 /* Food_CombinatorApp.swift */; };
 		8DE51F6E2605211400E124D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE51F6D2605211400E124D2 /* ContentView.swift */; };
 		8DE51F702605211500E124D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DE51F6F2605211500E124D2 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D3BE9512608473500E8F51D /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +148,9 @@
 			dependencies = (
 			);
 			name = "Food Combinator";
+			packageProductDependencies = (
+				8D3BE9502608473500E8F51D /* Alamofire */,
+			);
 			productName = "Food Combinator";
 			productReference = 8DE51F682605211400E124D2 /* Food Combinator.app */;
 			productType = "com.apple.product-type.application";
@@ -217,6 +222,9 @@
 				Base,
 			);
 			mainGroup = 8DE51F5F2605211400E124D2;
+			packageReferences = (
+				8D3BE94F2608473500E8F51D /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 8DE51F692605211400E124D2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -580,6 +588,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8D3BE94F2608473500E8F51D /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8D3BE9502608473500E8F51D /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D3BE94F2608473500E8F51D /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8DE51F602605211400E124D2 /* Project object */;
 }

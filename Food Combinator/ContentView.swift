@@ -6,9 +6,86 @@
 //
 
 import SwiftUI
+import Alamofire
 
 func generateNewTarget() ->  Int {
     return Int.random(in: 1..<100)
+}
+
+func getWebscrapeData() {
+    // prepare json data
+    /*
+    let json: [String: Any] = ["message": "hello dude",
+                               "dict": ["1":"First", "2":"Second"]]
+     */
+    
+   
+    let parameters: [String: Any] = ["ingredients": ["egg", "bread"]]
+    
+    
+    /*
+     To test it the post request in terminal:
+     
+     curl -i -X POST -H 'Content-Type: application/json' -d '{"ingredients": ["egg", "bread"]}' https://us-central1-food-combinator-308402.cloudfunctions.net/webscrape
+     
+     */
+    
+    AF.request("https://us-central1-food-combinator-308402.cloudfunctions.net/webscrape", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        .validate(statusCode: 200..<600)
+        .responseJSON { response in
+            if let responseJSON = response.value as? [String: AnyObject] {
+                
+                if let recipes = responseJSON["recipes"] as? [[String: AnyObject]] {
+                    
+                    for i in 0..<recipes.count {
+                        let recipe = recipes[i]
+                        let title = recipe["title"] as? String
+                        let link = recipe["link"]  as? String
+                        let ingredients = recipe["ingredients"] as? [String]
+                        
+                        print("link: \(link ?? "no link")")
+                        print("title: \(title ?? "no title")")
+                        print("ingredients: \(ingredients ?? [])")
+                        print(responseJSON)
+                    }
+                }
+                
+                
+                
+            }
+        }
+        /*
+        .responseString { response in
+            
+            switch response.result {
+                case .success:
+                    print("Validation Successful")
+                    ///debugPrint(response)
+                    //print(String(response.value ?? "novalue"))
+                    let strJSON = String(response.value ?? "novalue")
+                    let data = Data(strJSON.utf8)
+                    
+                    print(strJSON)
+                    do {
+                        
+                        // make sure this JSON is in the format we expect
+                        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                            // try to read out a string array
+                            let recipes = json["recipes"] as? [Any]
+                            for recipe in recipes ?? [] {
+                                let recipeJSON = recipe as? [String: Any]
+                                print(recipeJSON?["title"] as? String ?? "no name")
+                                print(recipeJSON?["ingredients"] as? [String] ?? "no ingredients")
+                            }
+                        }
+                    } catch let error as NSError {
+                        print("Failed to load: \(error.localizedDescription)")
+                    }
+                case let .failure(error):
+                    print(error)
+                }
+        }
+        */
 }
 
 struct ContentView: View {
@@ -49,7 +126,7 @@ struct ContentView: View {
             // calculate score button
             Button(action: {
                 alertIsVisible = true
-                
+                getWebscrapeData()
             }) {
                 Text("Hit me")
             }
