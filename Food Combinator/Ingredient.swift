@@ -16,10 +16,20 @@ struct Ingredient:Identifiable {
 }
 
 #if DEBUG
-let testInventoryData = [
+let testFridgeData = [
     Ingredient(name: "Egg", count: 6),
     Ingredient(name: "Apple", count: 2),
     Ingredient(name: "Bread Slice", count: 12),
+    Ingredient(name: "Peanut Butter", count: 1),
+    Ingredient(name: "Honey", count: 1)
+]
+
+let testIngredientsData = [
+    Ingredient(name: "Soy Sauce", count: 1),
+    Ingredient(name: "Egg", count: 1),
+    Ingredient(name: "Apple", count: 1),
+    Ingredient(name: "Bread Slice", count: 1),
     Ingredient(name: "Peanut Butter", count: 1)
 ]
 #endif
+

@@ -8,53 +8,21 @@
 import SwiftUI
 
 struct IngredientSelectorView: View {
-    var inventory: [Ingredient] = []
+    @State var fridge:[Ingredient] = []
+    var ingredients: [Ingredient] = []
+    
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                Text("Fridge")
-                    .font(.title)
-                    .fontWeight(.bold)
-                List (inventory) { ingredient in
-                    HStack {
-                        Image(systemName: "photo")
-                        VStack(alignment: .leading) {
-                            Text(ingredient.name)
-                            Text("Count: \(ingredient.count)")
-                                .foregroundColor(Color.gray)
-                        }
-                        Spacer()
-                        Image(systemName: "trash")
-                    }
-                }
-                
-                
-                HStack {
-                    Text("Ingredients")
-                        .font(.title)
-                        .fontWeight(.bold)
-                    Spacer()
-                        .frame(width: 100.0, height: 4.0)
-                    Button(action: {}) {
-                        Text("Speech to Text")
-                    }
-                }
-                TextField("Search For Ingredient", text: /*@START_MENU_TOKEN@*//*@PLACEHOLDER=Value@*/.constant("")/*@END_MENU_TOKEN@*/)
-                
-                List (0..<5) { item in
-                    HStack {
-                        Image(systemName: "photo")
-                        Text("Ingredient Name")
-                    }
-                }
-                
-                
-            }
-            .padding(.leading, 16.0)
+            FridgeView(fridge: $fridge)
+            
+            IngredientsView(ingredients: ingredients)
+            
             
             Button(action: {}) {
                 Text("What can I make?")
             }
+            Spacer()
+                .frame(height: 27.0)
         }
         
     }
@@ -62,6 +30,85 @@ struct IngredientSelectorView: View {
 
 struct IngredientSelectorView_Previews: PreviewProvider {
     static var previews: some View {
-        IngredientSelectorView(inventory: testInventoryData)
+        IngredientSelectorView(fridge: testFridgeData, ingredients: testIngredientsData)
     }
+}
+
+struct FridgeItemCell: View {
+    let ingredient: Ingredient
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "photo")
+            VStack(alignment: .leading) {
+                Text(ingredient.name)
+                Text("Count: \(ingredient.count)")
+                    .foregroundColor(Color.gray)
+            }
+            Spacer()
+            Button(action: {
+                
+            }) {
+                Image(systemName: "trash")
+            }
+        }
+    }
+}
+
+struct FridgeView: View {
+    @Binding var fridge: [Ingredient]
+    
+    var body: some View {
+        
+        NavigationView {
+            List {
+                ForEach(fridge) { ingredient in
+                    FridgeItemCell(ingredient: ingredient)
+                }.onDelete(perform: delete)
+            }.navigationBarTitle(Text("Fridge"))
+        }
+        .frame(height: 300.0)
+        
+    }
+    func delete(at offsets: IndexSet) {
+        fridge.remove(atOffsets: offsets)
+    }
+}
+
+struct IngredientsView: View {
+    @State var ingredientSearchText: String = ""
+    
+    let ingredients: [Ingredient]
+    
+    var body: some View {
+        VStack {
+            HStack {
+                Text("Ingredients")
+                    .font(.title)
+                    .fontWeight(.bold)
+                    
+                Spacer()
+                    .frame(width: 110.0)
+                Button(action: {}) {
+                    Text("Speech to Text")
+                }
+            }
+            .padding(.top, 50.0)
+            
+            List {
+                TextField("Search For Ingredient", text: $ingredientSearchText )
+                
+                ForEach(ingredients) { ingredient in
+                    HStack {
+                        Image(systemName: "photo")
+                        Text(ingredient.name)
+                    }
+                }
+            }
+            
+        }
+        
+        
+    }
+    
 }
