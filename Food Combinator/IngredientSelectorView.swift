@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct IngredientSelectorView_Previews: PreviewProvider {
+    static var previews: some View {
+        IngredientSelectorView(fridge: testFridgeData, ingredients: testIngredientsData)
+    }
+}
+
 struct IngredientSelectorView: View {
     @State var fridge:[Ingredient] = []
     var ingredients: [Ingredient] = []
@@ -15,7 +21,7 @@ struct IngredientSelectorView: View {
         VStack {
             FridgeView(fridge: $fridge)
             
-            IngredientsView(ingredients: ingredients)
+            IngredientsView(ingredients: ingredients, fridge: $fridge)
             
             
             Button(action: {}) {
@@ -25,33 +31,6 @@ struct IngredientSelectorView: View {
                 .frame(height: 27.0)
         }
         
-    }
-}
-
-struct IngredientSelectorView_Previews: PreviewProvider {
-    static var previews: some View {
-        IngredientSelectorView(fridge: testFridgeData, ingredients: testIngredientsData)
-    }
-}
-
-struct FridgeItemCell: View {
-    let ingredient: Ingredient
-    
-    var body: some View {
-        HStack {
-            Image(systemName: "photo")
-            VStack(alignment: .leading) {
-                Text(ingredient.name)
-                Text("Count: \(ingredient.count)")
-                    .foregroundColor(Color.gray)
-            }
-            Spacer()
-            Button(action: {
-                
-            }) {
-                Image(systemName: "trash")
-            }
-        }
     }
 }
 
@@ -68,6 +47,7 @@ struct FridgeView: View {
             }.navigationBarTitle(Text("Fridge"))
         }
         .frame(height: 300.0)
+        .animation(.spring())
         
     }
     func delete(at offsets: IndexSet) {
@@ -75,10 +55,32 @@ struct FridgeView: View {
     }
 }
 
+
+struct FridgeItemCell: View {
+    let ingredient: Ingredient
+    
+    var body: some View {
+        HStack {
+            Image(systemName: "photo")
+            VStack(alignment: .leading) {
+                Text(ingredient.name)
+                Text("Count: \(ingredient.count)")
+                    .foregroundColor(Color.gray)
+            }
+            Spacer()
+            Button(action: {}) {
+                Image(systemName: "trash")
+            }
+        }
+    }
+}
+
+
 struct IngredientsView: View {
     @State var ingredientSearchText: String = ""
     
     let ingredients: [Ingredient]
+    @Binding var fridge: [Ingredient]
     
     var body: some View {
         VStack {
@@ -99,16 +101,28 @@ struct IngredientsView: View {
                 TextField("Search For Ingredient", text: $ingredientSearchText )
                 
                 ForEach(ingredients) { ingredient in
-                    HStack {
-                        Image(systemName: "photo")
-                        Text(ingredient.name)
+                    Button(action: {
+                        addIngredient(ingredient: ingredient)
+                    }) {
+                        HStack {
+                            Image(systemName: "photo")
+                            Text(ingredient.name)
+                        }
                     }
                 }
             }
             
         }
-        
-        
     }
     
+    func addIngredient(ingredient: Ingredient) {
+        if let index = fridge.firstIndex(where: { $0.name == ingredient.name}) {
+            fridge[index].count += 1
+        }
+        else {
+            fridge.insert(ingredient, at: 0)
+            print(fridge[0])
+        }
+        
+    }
 }
