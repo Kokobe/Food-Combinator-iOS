@@ -8,8 +8,13 @@
 import Foundation
 import Alamofire
 
-func getWebscrapeData() {
-    let parameters: [String: Any] = ["ingredients": ["egg", "bread"]]
+func getWebscrapeData(fridge: [Ingredient]) {
+    var ingredients = [String]()
+    for i in fridge {
+        ingredients.append(i.name)
+    }
+    
+    let parameters: [String: Any] = ["ingredients": ingredients]
     
     /*
      To test it the post request in terminal:
@@ -35,6 +40,7 @@ func getWebscrapeData() {
                         print("title: \(title ?? "no title")")
                         print("ingredients: \(ingredients ?? [])")
                         print(responseJSON)
+                        
                     }
                 }
                 

@@ -49,7 +49,7 @@ struct ContentView: View {
             // calculate score button
             Button(action: {
                 alertIsVisible = true
-                getWebscrapeData()
+                //getWebscrapeData()
             }) {
                 Text("Hit me")
             }

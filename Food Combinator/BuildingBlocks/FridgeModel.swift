@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-class FridgeStore : ObservableObject {
+class FridgeModel : ObservableObject {
     var fridge: [Ingredient] {
         didSet {didChange.send()} //notifies subject (the body view) when fridge changes!
     }
