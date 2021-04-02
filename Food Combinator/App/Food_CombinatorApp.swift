@@ -11,7 +11,7 @@ import SwiftUI
 struct Food_CombinatorApp: App {
     var body: some Scene {
         WindowGroup {
-            IngredientSelectorView(fridgeModel: testFridgeData, ingredients: testIngredientsData)
+            IngredientSelectorView(fridge: testFridgeData, ingredients: testIngredientsData)
         }
     }
 }

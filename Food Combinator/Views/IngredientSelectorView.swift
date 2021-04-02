@@ -10,6 +10,7 @@ import SwiftUI
 struct IngredientSelectorView: View {
     @State var fridge:[Ingredient] = []
     var ingredients: [Ingredient] = []
+    @StateObject var recipeService = RecipeWebService()
     
     var body: some View {
         NavigationView {
@@ -20,9 +21,12 @@ struct IngredientSelectorView: View {
                     IngredientsView(ingredients: ingredients, fridge: $fridge)
                 }
                
-                NavigationLink(destination: RecipesView(fridge: fridge)) {
-                        Text("What can I make?")
-                }
+                
+                NavigationLink(destination: RecipesView()) {
+                    Text("What can I make?")
+                }.simultaneousGesture(TapGesture().onEnded{
+                    recipeService.fetchRecipes(fridge: fridge)
+                })
                 
                 
                 
@@ -31,7 +35,9 @@ struct IngredientSelectorView: View {
             .animation(.spring())
             .listStyle(GroupedListStyle())
         }.navigationViewStyle(StackNavigationViewStyle())
+        .environmentObject(recipeService)
     }
+    
 }
 
 struct FridgeView: View {

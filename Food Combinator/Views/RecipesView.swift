@@ -8,13 +8,12 @@
 import SwiftUI
 
 struct RecipesView: View {
-    var fridge: [Ingredient]
-    
+    @EnvironmentObject var recipeService: RecipeWebService
     var body: some View {
         
         List {
-            ForEach (fridge) { ingredient in
-                Text(ingredient.name)
+            ForEach (recipeService.recipes_pub) { recipe in
+                Text(recipe.title ?? "none")
             }
             
         }
@@ -26,6 +25,6 @@ struct RecipesView: View {
 
 struct RecipesView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipesView(fridge: testFridgeData)
+        RecipesView()
     }
 }
