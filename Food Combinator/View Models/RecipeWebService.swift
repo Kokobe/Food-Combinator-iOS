@@ -18,9 +18,10 @@ class RecipeWebService: ObservableObject {
     
     // send a notification whenever this property changes
     @Published var recipes_pub: [Recipe] = [] { didSet {didChange.send()} }
-    @Published var loading: Bool = true { didSet {didChange.send()} }
+    @Published var loading: Bool { didSet {didChange.send()} }
     
-    init(testDataEnabled: Bool = false) {
+    init(testDataEnabled: Bool = false, showLoading: Bool = true) {
+        self.loading = showLoading
         //self.fetchRecipes(fridge: fridge)
         if testDataEnabled {
             self.recipes_pub.append(Recipe(title: "Avocados and Toast", ingredients:  translateIngredients(ingredientStringArray:["1 Avocado", "1 Toast"]), link: "https://www.allrecipes.com/recipe/279650/avocado-toast-and-egg-for-one/", image: "https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimages.media-allrecipes.com%2Fuserphotos%2F7897357.jpg"))

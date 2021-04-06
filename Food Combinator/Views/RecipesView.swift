@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RecipesView: View {
     @EnvironmentObject var recipeService: RecipeWebService
-    @State var loading = true
     var body: some View {
         if (recipeService.loading) {
             
@@ -19,7 +18,7 @@ struct RecipesView: View {
                     .fontWeight(.light)
                 Spacer()
                     .frame(height: 40.0)
-                ActivityIndicator(shouldAnimate: $loading)
+                ActivityIndicator(shouldAnimate: $recipeService.loading)
                 
                 
                 
@@ -41,7 +40,7 @@ struct RecipesView: View {
 
 struct RecipesView_Previews: PreviewProvider {
     static var previews: some View {
-        let recipeService = RecipeWebService(testDataEnabled: true)
+        let recipeService = RecipeWebService(testDataEnabled: true, showLoading: false)
         RecipesView().environmentObject(recipeService)
     }
 }
