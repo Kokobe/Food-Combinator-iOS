@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct Food_CombinatorApp: App {
+    @StateObject var recipeService = RecipeWebService()
+    
     var body: some Scene {
         WindowGroup {
             IngredientSelectorView(fridge: testFridgeData, ingredients: testIngredientsData)
+                .environmentObject(recipeService)
         }
     }
 }

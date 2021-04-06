@@ -10,7 +10,7 @@ import SwiftUI
 struct IngredientSelectorView: View {
     @State var fridge:[Ingredient] = []
     var ingredients: [Ingredient] = []
-    @StateObject var recipeService = RecipeWebService()
+    @EnvironmentObject var recipeService: RecipeWebService
     
     var body: some View {
         NavigationView {
@@ -35,7 +35,7 @@ struct IngredientSelectorView: View {
             .animation(.spring())
             .listStyle(GroupedListStyle())
         }.navigationViewStyle(StackNavigationViewStyle())
-        .environmentObject(recipeService)
+        
     }
     
 }
@@ -44,7 +44,6 @@ struct FridgeView: View {
     @Binding var fridge: [Ingredient]
     
     var body: some View {
-        
         
         List {
             Text("Fridge")

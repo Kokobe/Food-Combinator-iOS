@@ -22,6 +22,8 @@
 		8DE51F732605211500E124D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DE51F722605211500E124D2 /* Preview Assets.xcassets */; };
 		8DE51F7E2605211500E124D2 /* Food_CombinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE51F7D2605211500E124D2 /* Food_CombinatorTests.swift */; };
 		8DE51F892605211500E124D2 /* Food_CombinatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE51F882605211500E124D2 /* Food_CombinatorUITests.swift */; };
+		8DF7BB4C261ABE84009F70AB /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7BB4B261ABE84009F70AB /* ImageLoader.swift */; };
+		8DF7BB51261AD91B009F70AB /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF7BB50261AD91B009F70AB /* ActivityIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		8DE51F842605211500E124D2 /* Food CombinatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Food CombinatorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DE51F882605211500E124D2 /* Food_CombinatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food_CombinatorUITests.swift; sourceTree = "<group>"; };
 		8DE51F8A2605211500E124D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8DF7BB4B261ABE84009F70AB /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		8DF7BB50261AD91B009F70AB /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +119,7 @@
 				8D9055B92612641000D9F934 /* RecipesView.swift */,
 				8DE51F6D2605211400E124D2 /* ContentView.swift */,
 				8D9055B4261103AD00D9F934 /* NavigationBarModifier.swift */,
+				8DF7BB50261AD91B009F70AB /* ActivityIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				8DDC63F22616BABF00B24CD8 /* RecipeWebService.swift */,
+				8DF7BB4B261ABE84009F70AB /* ImageLoader.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -335,7 +341,9 @@
 				8D9055BA2612641000D9F934 /* RecipesView.swift in Sources */,
 				8D8A1D58260D531A009D7B17 /* FoodScraper.swift in Sources */,
 				8D8A1D53260D5232009D7B17 /* IngredientSelectorView.swift in Sources */,
+				8DF7BB51261AD91B009F70AB /* ActivityIndicator.swift in Sources */,
 				8DDC63EE2616B9B800B24CD8 /* User.swift in Sources */,
+				8DF7BB4C261ABE84009F70AB /* ImageLoader.swift in Sources */,
 				8D8A1D5D260D579F009D7B17 /* Ingredient.swift in Sources */,
 				8DE51F6E2605211400E124D2 /* ContentView.swift in Sources */,
 				8DDC63F32616BABF00B24CD8 /* RecipeWebService.swift in Sources */,
